@@ -10,26 +10,29 @@ export default function Post() {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
-    const PostHandler = e => {
+    const PostHandler = async e => {
         e.preventDefault();
         setLoading(true);
         setError("");
 
-        const formData = new FormData();
-		formData.append('File', img);
-		formData.append('name', nameRef.current.value);
-		formData.append('caption', captionRef.current.value);
-        
-        fetch('/api/post', {
-            method: 'POST',
-            body: formData
-        })
-        .then(history.push("/show"))
-        .catch(err => {
+        try {
+            // get form data 
+            const formData = new FormData();
+            formData.append('File', img);
+            formData.append('name', nameRef.current.value);
+            formData.append('caption', captionRef.current.value);
+            //  make post req.
+            await fetch('/api/post', {
+                method: 'POST',
+                body: formData
+            });
+            //  redirect to `show` component
+            history.push("/show")
+        } catch (err) {
             console.log(err)
             setError(err);
-            setLoading(false);
-        })
+            setLoading(false);   
+        }
     }
 
     const FileChangeHandler = e => {

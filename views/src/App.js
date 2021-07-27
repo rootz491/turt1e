@@ -6,6 +6,8 @@ import Post from "./components/Post";
 import Show from "./components/Show";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
+import DetailedPost from "./components/DetailedPost";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
@@ -18,8 +20,10 @@ function App() {
 
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/post" component={Post} />
-        <Route path="/show" component={Show} />
+        <Route exact path="/post" component={Post} />
+        <Route exact path="/404" component={PageNotFound} />
+        <Route exact path="/show" component={Show} />
+        <Route path="/show/:id" component={DetailedPost} />
       </Switch>
 
     </Container>

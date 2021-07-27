@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button, Alert } from "react-bootstrap";
+import { useHistory } from 'react-router-dom';
 
 export default function Show() {
+    const history = useHistory();
     const [posts, setPosts] = useState([]);
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
@@ -15,8 +17,8 @@ export default function Show() {
     }, [])
 
     const deletePostHandler = e => {
-        let card = e.target.parentElement.parentElement;
-        let postId = e.target.parentElement.parentElement.id;
+        let card = e.target.parentElement.parentElement.parentElement;
+        let postId = e.target.parentElement.parentElement.parentElement.id;
         setLoading(true);
         setSuccess('');
 
@@ -36,6 +38,11 @@ export default function Show() {
         }) 
     }
 
+    const showPostHandler = e => {
+        let postId = e.target.parentElement.parentElement.parentElement.id;
+        history.push(`/show/${postId}`);
+    }
+
     return (
         <>
         {success && <Alert variant="success">{success}</Alert>}
@@ -47,8 +54,11 @@ export default function Show() {
                                 <Card.Img style={{maxHeight: "120px", width: "auto", margin: "auto"}} variant="top" src={post.url || "https://via.placeholder.com/150x75?text=placeholder+image"} />
                                 <Card.Body>
                                     <Card.Title>{post.name}</Card.Title>
-                                    <Card.Text>{post.caption}</Card.Text>
-                                    <Button disabled={loading} onClick={deletePostHandler} variant="danger">delete</Button>
+                                    <Card.Text style={{minHeight: "60px"}}>{post.caption}</Card.Text>
+                                    <div className="d-flex justify-content-between">
+                                        <Button disabled={loading} onClick={showPostHandler} variant="primary">show</Button>
+                                        <Button disabled={loading} onClick={deletePostHandler} variant="danger">delete</Button>
+                                    </div>
                                 </Card.Body>
                             </Card>
                 }) :

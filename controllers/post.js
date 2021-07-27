@@ -17,7 +17,8 @@ router.get("/get", (_, res) => {
 
 router.get("/post/:id", (req, res) => {
     const id = req.params.id;
-    getPostById(id, data => {
+    if (id.length !== 24) res.json({success: false})
+    else getPostById(id, data => {
         if (data)
             res.json({success: true, data});
         else
@@ -27,9 +28,14 @@ router.get("/post/:id", (req, res) => {
 
 router.delete("/post/:id", (req, res) => {
     const id = req.params.id;
-    deletePostById(id, data => {
-        if (data)
+    if(id.length !== 24) res.json({success: false})
+    else deletePostById(id, async data => {
+        if (data) {
+            //  delete img from cloudinary
+            await cloudinary.uploader.destroy(data.cloudinary_id);
+            //  send success as response
             res.json({success: true, data});
+        }
         else
             res.json({success: false});
     });
@@ -38,22 +44,25 @@ router.delete("/post/:id", (req, res) => {
 router.post('/post', fileUpload.single("File"), async (req, res) => {
     const { name, caption } = req.body;
     streamifier.createReadStream(req.file.buffer).pipe(cloudinary.uploader.upload_stream({
-        folder: "React-app-0"
-    },
-    (err, result) => {
-        if (result) {
-            console.log(result);
-            const cloudinary_id = result.public_id; 
-            const url = result.secure_url;
-            addPost(name, caption, url, cloudinary_id, data => {
-                if (data)
-                    res.json({success: true, data});
-                else
-                    res.json({success: false});
-            })
+            folder: "React-app-0"
+        },
+        (err, result) => {
+            if (result) {
+                const cloudinary_id = result.public_id; 
+                const url = result.secure_url;
+                addPost(name, caption, url, cloudinary_id, data => {
+                    if (data)
+                        res.json({success: true, data});
+                    else
+                        res.json({success: false});
+                })
+            }
+            else {
+                console.log(err);
+                res.json({success: false});
+            }
         }
-
-    }))
+    ))
 })
 
 
