@@ -17,7 +17,6 @@ export default function DetailedPost({ match: { params: { id } } }) {
                 const data = await res.json();
                 if (data.success) {
                     const post = data.data;
-                    console.log(post);
                     setName(post.name);
                     setCaption(post.caption);
                     setImg(post.url);

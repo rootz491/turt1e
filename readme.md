@@ -13,12 +13,30 @@ i dont know why i named it `this.name` but it's cool 😂
 *   { images } are stored in `Cloudinary`
 *   { name, caption } are stored in `mongodb`
 
+---
+
+#   code
+
+*   `/views` folder is where React / frontend part located.
+*   `/` (root) belongs to nodejs / bakend.
+*   All API keys and credentials are at `.env` which is at my machine only.
+*   All API routes are [here](./controllers/post.js)
+    *   Add post is really interesting because, it uploads image to `cloudinary` first and then add data to `mongodb`.
+    *   Delete post is also awesome because, it fisrt delete data from `mongodb` and then deletes image from `cloudinary`.
+*   all methods to interact with mongodb are [here](./modals/post.js)
+    *   it includes add post, get all posts, get post by id, delete post by id.
 
 ---
 
 ##  screenshots
 
-### show all posts
+>   /
+
+![img1](./img/home.png)
+
+>   /post
+
+![img2](./img/post.png)
 
 >   /show
 
@@ -28,10 +46,6 @@ i dont know why i named it `this.name` but it's cool 😂
 
 ![img4](./img/show_id.png)
 
->   /post
 
-![img2](./img/post.png)
 
->   /
 
-![img1](./img/home.png)

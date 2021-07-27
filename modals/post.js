@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect("mongodb+srv://test:test@todo.37zp7.mongodb.net/React-app-0?retryWrites=true&w=majority", {
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@todo.37zp7.mongodb.net/React-app-0?retryWrites=true&w=majority`, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
