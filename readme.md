@@ -15,6 +15,14 @@ i dont know why i named it `this.name` but it's cool 😂
 
 ---
 
+#   imp links
+
+*   link to [mongodb collection](https://cloud.mongodb.com/v2/6090eeb50c0db149bafc5508#metrics/replicaSet/60fe92dcb605e117959fe9c0/explorer/React-app-0/posts/find)
+*   link to [cloudinary bucket](https://cloudinary.com/console/c-ad683e5b8f8cb3d4b5036e79a830e3/media_library/folders/b067f9db70086538c4d0f079541ca14e)
+*   link to [react bootstrap components](https://react-bootstrap.github.io/components/alerts/)
+
+---
+
 #   code
 
 *   `/views` folder is where React / frontend part located.
