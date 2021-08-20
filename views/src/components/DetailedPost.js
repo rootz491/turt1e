@@ -32,7 +32,7 @@ export default function DetailedPost({ match: { params: { id } } }) {
             }
         }
         fetchData();
-    }, []);
+    }, [id, history]);
 
     const deletePostHandler = e => {
         setLoading(true);
