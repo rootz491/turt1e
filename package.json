@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "build": "cd views; npm run build"
+    "build": "cd views && npm install && npm run build"
   },
   "author": "karan sharma",
   "license": "ISC",
